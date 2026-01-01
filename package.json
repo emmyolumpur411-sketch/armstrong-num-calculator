@@ -1,0 +1,12 @@
+{
+	"scripts": {
+		
+		"build:public-css": "npx tailwindcss -i ./app/resources/static/public/css/globals.css -o ./app/resources/static/public/css/output.css --watch",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"tailwindcss": "^4.1.18",
+		"@tailwindcss/cli": "^4.1.18"
+	}
+}
