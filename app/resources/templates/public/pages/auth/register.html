@@ -1,0 +1,43 @@
+{% extends "public/base/index.html" %}
+{% from "public/macros/forms.html" import render_input, render_label %}
+{% from "public/macros/buttons.html" import render_button %}
+
+{% block title %}Register - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <div class="max-w-md mx-auto">
+        <div class="bg-card border border-border rounded-lg shadow-lg p-6 lg:p-8">
+            <h1 class="text-2xl lg:text-3xl font-bold text-foreground mb-2 text-center">Create Account</h1>
+            <p class="text-muted-foreground text-center mb-6">Sign up to start using the Armstrong Number Calculator</p>
+            
+            <form method="POST" action="{{ url_for('web.web_public.auth.register') }}" class="space-y-4">
+                {{ render_input("name", type="text", placeholder="Full Name", value=name|default(""), required=True, label="Full Name") }}
+                
+                {{ render_input("email", type="email", placeholder="your@email.com", value=email|default(""), required=True, label="Email Address") }}
+                
+                {{ render_input("phone", type="tel", placeholder="1234567890", value=phone|default(""), required=True, label="Phone Number") }}
+                
+                {{ render_input("username", type="text", placeholder="username", value=username|default(""), required=True, label="Username") }}
+                
+                {{ render_input("password", type="password", placeholder="••••••••", required=True, label="Password") }}
+                
+                {{ render_input("confirm_password", type="password", placeholder="••••••••", required=True, label="Confirm Password") }}
+                
+                <div class="pt-2">
+                    {{ render_button("Create Account", type="primary", size="lg", classes="w-full", btn_type="submit") }}
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-muted-foreground">
+                    Already have an account? 
+                    <a href="{{ url_for('web.web_public.auth.login') }}" class="text-primary hover:underline font-medium">
+                        Login here
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

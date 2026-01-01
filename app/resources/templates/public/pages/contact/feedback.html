@@ -1,0 +1,41 @@
+{% extends "public/base/index.html" %}
+{% from "public/macros/forms.html" import render_input, render_textarea %}
+{% from "public/macros/buttons.html" import render_button %}
+
+{% block title %}Submit Feedback - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-6">
+            <a href="{{ url_for('web.web_public.contact.index') }}" 
+               class="text-primary hover:underline flex items-center gap-2">
+                <i class="bx bx-arrow-back"></i> Back to Contact
+            </a>
+        </div>
+        
+        <h1 class="text-3xl lg:text-4xl font-bold text-foreground mb-8">Submit Feedback</h1>
+        
+        <div class="bg-card border border-border rounded-lg shadow-sm p-6 lg:p-8">
+            <p class="text-muted-foreground mb-6">
+                We'd love to hear your thoughts, suggestions, or any issues you've encountered. 
+                Your feedback helps us improve the application.
+            </p>
+            
+            <form method="POST" action="{{ url_for('web.web_public.contact.feedback') }}" class="space-y-6">
+                {{ render_input("name", type="text", placeholder="Your Name", value=name|default(""), required=True, label="Name") }}
+                
+                {{ render_input("email", type="email", placeholder="your@email.com", value=email|default(""), required=True, label="Email") }}
+                
+                {{ render_input("subject", type="text", placeholder="Feedback Subject", value=subject|default(""), label="Subject (Optional)") }}
+                
+                {{ render_textarea("message", placeholder="Your feedback, suggestions, or issues...", value=message|default(""), required=True, label="Message", rows=6) }}
+                
+                <div class="pt-4">
+                    {{ render_button("Submit Feedback", type="primary", size="lg", classes="w-full", btn_type="submit") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "public/base/index.html" %}
+
+{% block title %}Settings - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <h1 class="text-3xl lg:text-4xl font-bold text-foreground mb-8">Settings</h1>
+    
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl">
+        <a href="{{ url_for('web.web_public.settings.profile') }}" 
+           class="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <i class="bx bx-user text-2xl text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-foreground">Profile</h2>
+                    <p class="text-sm text-muted-foreground">Manage your profile information</p>
+                </div>
+            </div>
+        </a>
+        
+        <a href="{{ url_for('web.web_public.settings.address') }}" 
+           class="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <i class="bx bx-map text-2xl text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-foreground">Address</h2>
+                    <p class="text-sm text-muted-foreground">Update your address information</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

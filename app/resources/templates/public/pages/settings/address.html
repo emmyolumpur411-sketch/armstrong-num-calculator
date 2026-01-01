@@ -1,0 +1,40 @@
+{% extends "public/base/index.html" %}
+{% from "public/macros/forms.html" import render_input %}
+{% from "public/macros/buttons.html" import render_button %}
+
+{% block title %}Address Settings - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-6">
+            <a href="{{ url_for('web.web_public.settings.index') }}" 
+               class="text-primary hover:underline flex items-center gap-2">
+                <i class="bx bx-arrow-back"></i> Back to Settings
+            </a>
+        </div>
+        
+        <h1 class="text-3xl lg:text-4xl font-bold text-foreground mb-8">Address Settings</h1>
+        
+        <div class="bg-card border border-border rounded-lg shadow-sm p-6 lg:p-8">
+            <form method="POST" action="{{ url_for('web.web_public.settings.address') }}" class="space-y-6">
+                {{ render_input("country", type="text", placeholder="Country", 
+                    value=current_user.address.country if current_user.address else "", 
+                    required=True, label="Country") }}
+                
+                {{ render_input("state", type="text", placeholder="State/Province", 
+                    value=current_user.address.state if current_user.address else "", 
+                    required=True, label="State/Province") }}
+                
+                <div class="flex gap-4 pt-4">
+                    {{ render_button("Update Address", type="primary", size="lg", btn_type="submit") }}
+                    <a href="{{ url_for('web.web_public.settings.index') }}" 
+                       class="px-6 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-colors inline-flex items-center">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% from 'public/macros/alerts.html' import render_alert %}
+
+<div id="alert-box" class="alert-box fit-main flex flex-col items-center justify-center gap-y-4 fixed top-18 left-0 z-50 pointer-events-none">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% set alert_type = "info" %}
+                {% if category == "error" or category == "danger" %}
+                    {% set alert_type = "error" %}
+                {% elif category == "success" %}
+                    {% set alert_type = "success" %}
+                {% elif category == "warning" %}
+                    {% set alert_type = "warning" %}
+                {% endif %}
+                
+                <div id="alert-{{ loop.index }}" class="pointer-events-auto min-w-96" role="alert" data-auto-dismiss="5000">
+                    {{ render_alert(message|safe, alert_type, dismissible=True, icon=True) }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>

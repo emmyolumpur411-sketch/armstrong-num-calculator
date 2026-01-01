@@ -1,0 +1,68 @@
+{% extends "public/base/index.html" %}
+
+{% block title %}Contact Us - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <h1 class="text-3xl lg:text-4xl font-bold text-foreground mb-8 text-center">Contact Us</h1>
+    
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-card border border-border rounded-lg shadow-sm p-6 lg:p-8">
+            <h2 class="text-2xl font-semibold text-foreground mb-6">Get in Touch</h2>
+            <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="bx bx-envelope text-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-foreground mb-1">Email</h3>
+                        <p class="text-muted-foreground">info@lehmaneducational.com</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="bx bx-phone text-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-foreground mb-1">Phone</h3>
+                        <p class="text-muted-foreground">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="bx bx-map text-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-foreground mb-1">Address</h3>
+                        <p class="text-muted-foreground">
+                            123 Education Street<br>
+                            Learning City, LC 12345<br>
+                            United States
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-card border border-border rounded-lg shadow-sm p-6 lg:p-8">
+            <h2 class="text-2xl font-semibold text-foreground mb-6">About Us</h2>
+            <p class="text-muted-foreground mb-4">
+                Lehman Educational Services is dedicated to providing innovative educational tools and resources 
+                to help students learn and understand mathematical concepts.
+            </p>
+            <p class="text-muted-foreground">
+                Our Armstrong Number Calculator is designed to make learning about these fascinating numbers 
+                interactive and engaging. We welcome your feedback and suggestions!
+            </p>
+            <div class="mt-6">
+                <a href="{{ url_for('web.web_public.contact.feedback') }}" 
+                   class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors inline-block">
+                    Submit Feedback
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

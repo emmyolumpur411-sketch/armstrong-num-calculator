@@ -1,0 +1,57 @@
+{% extends "public/base/index.html" %}
+{% from "public/macros/forms.html" import render_input, render_select %}
+{% from "public/macros/buttons.html" import render_button %}
+
+{% block title %}Profile Settings - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-6">
+            <a href="{{ url_for('web.web_public.settings.index') }}" 
+               class="text-primary hover:underline flex items-center gap-2">
+                <i class="bx bx-arrow-back"></i> Back to Settings
+            </a>
+        </div>
+        
+        <h1 class="text-3xl lg:text-4xl font-bold text-foreground mb-8">Profile Settings</h1>
+        
+        <div class="bg-card border border-border rounded-lg shadow-sm p-6 lg:p-8">
+            <form method="POST" action="{{ url_for('web.web_public.settings.profile') }}" class="space-y-6">
+                {{ render_input("firstname", type="text", placeholder="First Name", 
+                    value=current_user.profile.firstname if current_user.profile else "", 
+                    required=True, label="First Name") }}
+                
+                {{ render_input("lastname", type="text", placeholder="Last Name", 
+                    value=current_user.profile.lastname if current_user.profile else "", 
+                    required=True, label="Last Name") }}
+                
+                {{ render_input("phone", type="tel", placeholder="Phone Number", 
+                    value=current_user.profile.phone if current_user.profile else "", 
+                    required=True, label="Phone Number") }}
+                
+                {{ render_select("gender", 
+                    options=[{"value": "", "text": "Select Gender"}, {"value": "Male", "text": "Male"}, {"value": "Female", "text": "Female"}, {"value": "Other", "text": "Other"}],
+                    selected=current_user.profile.gender if current_user.profile else "",
+                    label="Gender") }}
+                
+                <div class="flex gap-4 pt-4">
+                    {{ render_button("Update Profile", type="primary", size="lg", btn_type="submit") }}
+                    <a href="{{ url_for('web.web_public.settings.index') }}" 
+                       class="px-6 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-colors inline-flex items-center">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+            
+            <div class="mt-8 pt-8 border-t border-border">
+                <h3 class="text-lg font-semibold text-foreground mb-4">Danger Zone</h3>
+                <form method="POST" action="{{ url_for('web.web_public.settings.delete_profile') }}" 
+                      onsubmit="return confirm('Are you sure you want to delete your profile data? This action cannot be undone.');">
+                    {{ render_button("Delete Profile Data", type="danger", size="md", btn_type="submit") }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

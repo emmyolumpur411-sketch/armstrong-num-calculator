@@ -1,0 +1,66 @@
+{% from 'public/macros/macros.html' import render_btn %}
+{% set site_title = SITE_INFO["site_title"] %}
+{% set site_tagline = SITE_INFO["site_tagline"] %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>{% block title %} Am-strong Num {% endblock %}</title>
+		
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/css/output.css') }}">
+
+		{% block css_js_links %}{% endblock %}
+        {% block css_js_scripts %}{% endblock %}
+	</head>
+
+	<body class="">
+        {% include 'public/components/header.html' %}
+
+        <section id="wrapper" class="min-h-svh pt-16">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="fixed top-20 right-4 z-50 space-y-2 max-w-md">
+                        {% for category, message in messages %}
+                            <div class="bg-card border border-border rounded-lg shadow-lg p-4 flex items-start gap-3 {% if category == 'error' %}border-red-200 bg-red-50{% elif category == 'success' %}border-green-200 bg-green-50{% elif category == 'warning' %}border-yellow-200 bg-yellow-50{% else %}border-blue-200 bg-blue-50{% endif %}">
+                                <i class="bx {% if category == 'error' %}bx-error-circle text-red-600{% elif category == 'success' %}bx-check-circle text-green-600{% elif category == 'warning' %}bx-error text-yellow-600{% else %}bx-info-circle text-blue-600{% endif %} text-xl shrink-0"></i>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium {% if category == 'error' %}text-red-800{% elif category == 'success' %}text-green-800{% elif category == 'warning' %}text-yellow-800{% else %}text-blue-800{% endif %}">
+                                        {{ message }}
+                                    </p>
+                                </div>
+                                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="this.parentElement.remove()">
+                                    <i class="bx bx-x text-lg"></i>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <!-- Main content -->
+            <section id="main" class="dash-main p-5 min-h-svh flex flex-col gap-y-4 lg:min-h-[calc(100svh-theme(width.16))]">
+                {% include 'public/components/alert_modal.html' %}
+                {% include 'public/components/modal.html' %}
+
+                <div class="overflow-auto h-full">
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+        </section>
+
+
+        {% block scripts %}
+        {% endblock %}
+        
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+        <script src="{{ url_for('static', filename='public/js/script.js') }}"></script>
+        <script src="{{ url_for('static', filename='public/js/alert.js') }}"></script>
+	</body>
+</html>

@@ -1,0 +1,134 @@
+{% extends "public/base/index.html" %}
+
+{% block title %}Home - {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="w-site mx-auto py-8">
+    <!-- Hero Section -->
+    <section class="text-center py-12 lg:py-20">
+        <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-4">
+            Discover Armstrong Numbers
+        </h1>
+        <p class="text-lg lg:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            An Armstrong number is a number that equals the sum of its digits, each raised to the power of the number of digits.
+        </p>
+        {% if not current_user.is_authenticated %}
+        <div class="flex gap-4 justify-center">
+            <a href="{{ url_for('web.web_public.auth.register') }}" 
+               class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                Get Started
+            </a>
+            <a href="{{ url_for('web.web_public.auth.login') }}" 
+               class="px-6 py-3 border border-border text-foreground rounded-lg font-medium hover:bg-muted transition-colors">
+                Login
+            </a>
+        </div>
+        {% else %}
+        <div class="flex gap-4 justify-center">
+            <a href="{{ url_for('web.web_public.calculator.index') }}" 
+               class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                Try Calculator
+            </a>
+        </div>
+        {% endif %}
+    </section>
+
+    <!-- What are Armstrong Numbers Section -->
+    <section class="py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-6 text-center">
+                What are Armstrong Numbers?
+            </h2>
+            <div class="bg-card border border-border rounded-lg p-6 lg:p-8 shadow-sm">
+                <p class="text-foreground mb-4 leading-relaxed">
+                    An <strong>Armstrong number</strong> (also known as a <em>narcissistic number</em> or a <em>pluperfect digital invariant</em>) 
+                    is a number that is equal to the sum of its own digits raised to the power of the number of digits.
+                </p>
+                <div class="bg-muted rounded-lg p-4 my-6">
+                    <h3 class="font-semibold text-foreground mb-2">Example:</h3>
+                    <p class="text-foreground font-mono">
+                        153 = 1³ + 5³ + 3³ = 1 + 125 + 27 = 153
+                    </p>
+                    <p class="text-sm text-muted-foreground mt-2">
+                        Since 153 has 3 digits, we raise each digit to the power of 3.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h3 class="font-semibold text-foreground mb-3">Some Armstrong Numbers:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-foreground">
+                        <li><strong>1-digit:</strong> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9</li>
+                        <li><strong>3-digit:</strong> 153, 370, 371, 407</li>
+                        <li><strong>4-digit:</strong> 1634, 8208, 9474</li>
+                        <li><strong>5-digit:</strong> 54748, 92727, 93084</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-12 lg:py-16">
+        <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-8 text-center">
+            Features
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <i class="bx bx-calculator text-2xl text-primary"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-foreground mb-2">Check Single Number</h3>
+                <p class="text-muted-foreground">
+                    Enter any number to check if it's an Armstrong number and see the detailed calculation.
+                </p>
+            </div>
+            
+            <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <i class="bx bx-search text-2xl text-primary"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-foreground mb-2">Find in Range</h3>
+                <p class="text-muted-foreground">
+                    Search for all Armstrong numbers within a specified range and see the complete list.
+                </p>
+            </div>
+            
+            <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <i class="bx bx-history text-2xl text-primary"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-foreground mb-2">Track Attempts</h3>
+                <p class="text-muted-foreground">
+                    View your calculation history and track all your attempts with detailed results.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    {% if current_user.is_authenticated %}
+    <section class="py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-6 text-center">
+                How to Use
+            </h2>
+            <div class="bg-card border border-border rounded-lg p-6 lg:p-8 shadow-sm">
+                <ol class="list-decimal list-inside space-y-4 text-foreground">
+                    <li>
+                        <strong>Check a Number:</strong> Go to the Calculator page and enter a single number to check if it's an Armstrong number.
+                    </li>
+                    <li>
+                        <strong>Find in Range:</strong> Enter a minimum and maximum number to find all Armstrong numbers in that range.
+                    </li>
+                    <li>
+                        <strong>View History:</strong> Check your attempts page to see all your previous calculations and results.
+                    </li>
+                    <li>
+                        <strong>Manage Profile:</strong> Update your profile and address information in the Settings page.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
